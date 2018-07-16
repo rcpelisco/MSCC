@@ -18,5 +18,20 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "@coreui/coreui": "2.0.4",
+        "@coreui/coreui-plugin-chartjs-custom-tooltips": "1.2.0",
+        "@coreui/icons": "0.3.0",
+        "bootstrap": "4.1.2",
+        "chart.js": "^2.7.2",
+        "flag-icon-css": "3.0.0",
+        "font-awesome": "4.7.0",
+        "jquery": "3.3.1",
+        "pace": "0.0.4",
+        "pace-progress": "^1.0.2",
+        "perfect-scrollbar": "1.4.0",
+        "popper.js": "1.14.3",
+        "simple-line-icons": "2.4.1"
     }
 }

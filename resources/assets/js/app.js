@@ -6,6 +6,10 @@
  */
 
 require('./bootstrap');
+require('pace-progress');
+require('perfect-scrollbar');
+require('@coreui/coreui');
+require('chart.js');
 
 window.Vue = require('vue');
 
