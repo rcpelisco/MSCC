@@ -2,9 +2,7 @@
 
 @section('title', 'MSCC')
 
-@section('breadcrumbs')
-  @include('layouts.breadcrumb')
-@endsection
+@section('page-header-title', 'Members')
 
 @section('content')
 
