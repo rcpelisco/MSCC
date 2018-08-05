@@ -24,7 +24,8 @@ class Loan extends Model
     }
 
     public function monthlyPayment() {
-        return $this->principal / $this->date_mature->diffInMonths($this->date_released);
+        $monthsToPay = $this->date_mature->diffInMonths($this->date_released);
+        return (float)number_format(($this->principal / $monthsToPay), 2);
     }
 
     public function balance() {
@@ -32,7 +33,7 @@ class Loan extends Model
     }
 
     public function daysPAR() {
-        $startingMonth = floor($this->totalPaid() / number_format($this->monthlyPayment(), 2));
+        $startingMonth = floor($this->totalPaid() / $this->monthlyPayment());
         $startingMonth = $this->date_released->addMonth($startingMonth + 1);
         if($this->totalPaid() < $this->expectedPayment()) {
             return (Carbon::now())->diffInDays($startingMonth);
@@ -41,7 +42,7 @@ class Loan extends Model
     }
     
     public function totalPaid() {
-        return $this->payments->sum('amount_payment');
+        return (float)number_format((float)$this->payments->sum('amount_payment'), 2);
     }
 
     public function expectedPayment() {
