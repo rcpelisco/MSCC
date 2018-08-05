@@ -8,7 +8,7 @@
 <h1>Create Member</h1>
 <div class="row">
   <div class="col-md-6">
-    {!! Form::open(['action' => 'MembersController@store' , 'method' => 'post']) !!}
+    {!! Form::open(['action' => 'MembersController@update' , 'method' => 'post']) !!}
       <div class="card">
         <div class="card-header">
           <strong>Basic Information</strong>

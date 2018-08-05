@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index')->name('index');
 
 Route::resources([
-    'members' => 'MemberController'
+    'members' => 'MembersController'
 ]);
+
+Route::post('/members/{member}/loans', 'LoansController@store');
+Route::post('/loans/{loan}/payments', 'LoansController@pay');
+Route::get('/par_report', 'LoansController@showPARReport')->name('par_report.index');
+Route::get('/par_report/get_data', 'LoansController@getPARData')->name('par_report.get_data');

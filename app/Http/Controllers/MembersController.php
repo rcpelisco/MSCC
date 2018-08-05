@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use Carbon\Carbon;
 
-class MemberController extends Controller
+class MembersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('members.index');
+        return view('members.index', ['members' => Member::all()]);
     }
 
     /**
@@ -30,21 +31,17 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
+        request()->validate([
             'first_name' => 'required',
             'last_name' => 'required',
         ]);
-
-        $member = new Member();
-        $member->first_name = $request->first_name;
-        $member->last_name = $request->last_name;
-        $member->save();
-
+        
+        Member::create(request(['first_name', 'last_name']));
+        
         return redirect()->route('members.index');
     }
 
@@ -54,9 +51,9 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Member $member)
+    {   
+        return view('members.show', compact('member'));
     }
 
     /**

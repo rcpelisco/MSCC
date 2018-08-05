@@ -1,9 +1,9 @@
 <div class="sidebar">
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav ps ps--active-y">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="nav-icon icon-speedometer"></i> Dashboard
+        <a class="nav-link" href="{{ route('index') }}">
+          <i class="nav-icon icon-speedometer"></i> Home
         </a>
       </li>
       <li class="nav-title">Theme</li>
@@ -20,6 +20,11 @@
               <i class="nav-icon icon-plus"></i> Add Member</a>
           </li>
         </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('par_report.index') }}">
+          <i class="nav-icon icon-pie-chart"></i> PAR Report
+        </a>
       </li>
     </ul>
   </nav>
