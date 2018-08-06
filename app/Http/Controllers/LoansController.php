@@ -37,18 +37,21 @@ class LoansController extends Controller
     }
 
     public function showPARReport() {
-        return view('par_report.index');
+        $members = Member::all();
+
+        return view('par_report.index', compact('members'));
     }
 
     public function getPARData() {
-        $PARData = [0, 0, 0, 0, 0, 0];
-        foreach(Loan::all() as $loan) {
-            $PARData[0] += $loan->daysPAR() >= 1 && $loan->daysPAR() <= 7 ? 1 : 0;
-            $PARData[1] += $loan->daysPAR() >= 8 && $loan->daysPAR() <= 15 ? 1 : 0;
-            $PARData[2] += $loan->daysPAR() >= 16 && $loan->daysPAR() <= 30 ? 1 : 0;
-            $PARData[3] += $loan->daysPAR() >= 31 && $loan->daysPAR() <= 90 ? 1 : 0;
-            $PARData[4] += $loan->daysPAR() >= 90 && $loan->daysPAR() <= 360 ? 1 : 0;
-            $PARData[5] += $loan->daysPAR() > 360 ? 1 : 0;
+        $PARData = ['chart' => [0,0,0,0,0,0]];
+
+        foreach(Member::all() as $member) {
+            $PARData['chart'][0] += $member->daysPAR() >= 1 && $member->daysPAR() <= 7 ? 1 : 0;
+            $PARData['chart'][1] += $member->daysPAR() >= 8 && $member->daysPAR() <= 15 ? 1 : 0;
+            $PARData['chart'][2] += $member->daysPAR() >= 16 && $member->daysPAR() <= 30 ? 1 : 0;
+            $PARData['chart'][3] += $member->daysPAR() >= 31 && $member->daysPAR() <= 90 ? 1 : 0;
+            $PARData['chart'][4] += $member->daysPAR() >= 91 && $member->daysPAR() <= 360 ? 1 : 0;
+            $PARData['chart'][5] += $member->daysPAR() > 360 ? 1 : 0;
         }
         return response()->json($PARData, 200);
     }

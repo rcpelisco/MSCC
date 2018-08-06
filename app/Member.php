@@ -19,4 +19,16 @@ class Member extends Model
             'date_mature' => $date_mature,
         ]);
     }
+
+    public function daysPAR() {
+        return $this->loans->last()->daysPAR();
+    }
+
+    public static function PAR($query) {
+        return static::all()->filter(function($item, $key) use ($query) {
+            return $item->daysPAR() >= $query[0] && $item->daysPAR() <= $query[1];
+        })->count() / static::all()->filter(function($item, $key) {
+                return $item->daysPAR() > 0;
+            })->count() * 100;
+    }
 }

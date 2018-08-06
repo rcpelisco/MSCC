@@ -17,6 +17,87 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-header">
+        <strong>PAR Report</strong>
+        <small>Summary</small>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            1-7 days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([1,7]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            8-15 days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([8,15]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            16-30 days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([16,30]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            31-90 days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([31,90]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            90-360 days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([91,360]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            Over days: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              {{ number_format(App\Member::PAR([360,INF]), 2) }} %
+            </span>
+          </div>
+        </div>
+        <hr class="my-1">
+        <div class="row">
+          <div class="col-6">
+            Total: 
+          </div>
+          <div class="col-6">
+            <span class="pull-right">
+              100.00 %
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 
@@ -34,7 +115,8 @@
         url:'/par_report/get_data',
         data:'_token = <?php echo csrf_token() ?>',
         success: (data) => {
-          setChartData(data);
+          setChartData(data.chart);
+          $()
         }
       })
     }

@@ -104,27 +104,29 @@
         <h3>Payments</h3>
         <table class="table table-sm">
           <thead>
-            <td>Date</td>
-            <td>OR Number</td>
-            <td>Amount</td>
+            <td><small>Date</small></td>
+            <td><small>OR Number</small></td>
+            <td><small class="pull-right">Amount</small></td>
+            <td></td>
           </thead>
           <tbody>
             @foreach($member->loans->last()->payments as $payment)
               <tr>
+                <td><small>{{ $payment->date_payment->format('F d, Y') }}</small></td>
+                <td><small>{{ $payment->or_number }}</small></td>
+                <td><small class="pull-right">{{ $payment->amount_payment }}</small></td>
                 <td>
-                  <small>
-                    {{ $payment->date_payment->format('F d, Y') }}
-                  </small>
-                </td>
-                <td>
-                  <small>
-                    {{ $payment->or_number }}
-                  </small>
-                </td>
-                <td>
-                  <small>
-                    {{ $payment->amount_payment }}
-                  </small>
+                  <div class="dropdown show pull-right">
+                    <a class="btn btn-outline-secondary btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      {!! Form::open(['action' => ['PaymentsController@destroy', $payment->id] , 'method' => 'delete', 'style' => 'margin: 0px;']) !!}
+                        <button class="dropdown-item" type="button"><i class="fa fa-pencil"></i> Edit</button>
+                        <button class="dropdown-item" type="submit"><i class="fa fa-trash"></i>Delete</button>
+                      {!! Form::close() !!}
+                    </div>
+                  </div>
                 </td>
               </tr>
             @endforeach
@@ -132,7 +134,7 @@
         </table>
       </div>
       <div class="col-md-4">
-        {!! Form::open(['action' => ['LoansController@pay', $member->loans->last()->id] , 'method' => 'post']) !!}
+        {!! Form::open(['action' => ['PaymentsController@store', $member->loans->last()->id] , 'method' => 'post']) !!}
           <div class="card">
             <div class="card-header">
               <strong>Payment</strong>
