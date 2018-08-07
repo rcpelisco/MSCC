@@ -31,12 +31,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([-INF,0]), 2), 2) }}
+              @convert(round(App\Member::PAR([-INF,0]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([-INF,0]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([-INF,0]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -47,12 +47,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([1,7]), 2), 2) }}
+              @convert(round(App\Member::PAR([1,7]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([1,7]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([1,7]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -63,12 +63,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([8,15]), 2), 2) }}
+              @convert(round(App\Member::PAR([8,15]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([8,15]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([8,15]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -79,12 +79,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([16,30]), 2), 2) }}
+              @convert(round(App\Member::PAR([16,30]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([16,30]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([16,30]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -95,12 +95,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([31,90]), 2), 2) }}
+              @convert(round(App\Member::PAR([31,90]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([31,90]) / App\Member::totalBalance() * 100, 2), 2) }} %              
+              @convert(round(App\Member::PAR([31,90]) / App\Member::totalBalance() * 100, 2)) %              
             </span>
           </div>
         </div>
@@ -111,12 +111,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([91,360]), 2), 2) }}
+              @convert(round(App\Member::PAR([91,360]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([91,360]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([91,360]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -127,12 +127,12 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([361,INF]), 2), 2) }}
+              @convert(round(App\Member::PAR([361,INF]), 2))
             </span>
           </div>
           <div class="col-4">
             <span class="pull-right">
-              {{ number_format(round(App\Member::PAR([361,INF]) / App\Member::totalBalance() * 100, 2), 2) }} %
+              @convert(round(App\Member::PAR([361,INF]) / App\Member::totalBalance() * 100, 2)) %
             </span>
           </div>
         </div>
@@ -144,7 +144,7 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
-              {{ number_format(round(App\Member::totalBalance(), 2), 2) }}
+              @convert(round(App\Member::totalBalance(), 2))
             </span>
           </div>
           <div class="col-4">

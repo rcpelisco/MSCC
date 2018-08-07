@@ -105,6 +105,22 @@
         </div>
         <div class="row">
           <div class="col-7">
+            Interest: 
+          </div>
+          <div class="col-5">
+            &#8369; <span class="pull-right">@convert($member->loans->last()->balance() * .02)</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+            Penalty: 
+          </div>
+          <div class="col-5">
+            &#8369; <span class="pull-right">@convert(0)</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
             Days PAR: 
           </div>
           <div class="col-5">
@@ -126,14 +142,20 @@
             <td></td>
           </thead>
           <tbody>
+            @php
+              $balance = $member->loans->last()->principal
+            @endphp
             @foreach($member->loans->last()->payments as $payment)
               <tr>
                 <td><small>{{ $payment->date_payment->format('F d, Y') }}</small></td>
                 <td><small>{{ $payment->or_number }}</small></td>
-                <td><small class="pull-right">{{ $payment->amount_payment }}</small></td>
-                <td><small class="pull-right">{{ $payment->amount_payment }}</small></td>
-                <td><small class="pull-right">{{ $payment->amount_payment }}</small></td>
-                <td><small class="pull-right">{{ $payment->amount_payment }}</small></td>
+                <td><small>&#8369;<span class="pull-right">@convert($payment->amount_payment)</span></small></td>
+                <td><small>&#8369;<span class="pull-right">{{ 0.00 }}</span></small></td>
+                <td><small>&#8369;<span class="pull-right">{{ 0.00 }}</span></small></td>
+                @php
+                  $balance -= $payment->amount_payment;
+                @endphp
+                <td><small>&#8369;<span class="pull-right">@convert($balance)</span></small></td>
                 <td>
                   <div class="dropdown show pull-right">
                     <a class="btn btn-outline-secondary btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -205,9 +227,9 @@
 <div class="modal fade" id="paymentModal" tabindex="-2" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      {!! Form::open(['action' => ['PaymentsController@store', $member->loans->last()->id], 'method' => 'post']) !!}
+      {!! Form::open(['action' => ['PaymentsController@store', $member->loans->last()->id], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
       <div class="modal-header">
-        <h5 class="modal-title" id="paymentModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="paymentModalLabel">Payment form</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -248,12 +270,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-@section('javascripts')
-<script>
-$(function() {
-    
-})
-</script>
 @endsection
