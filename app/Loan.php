@@ -25,12 +25,12 @@ class Loan extends Model
 
     public function monthlyPayment() {
         $monthsToPay = $this->date_mature->diffInMonths($this->date_released);
-        return (float) sprintf('%0.2f', $this->principal / $monthsToPay);
-
+        $monthsToPay += $this->date_released->month == 2 ? 1 : 0;
+        return round($this->principal / $monthsToPay, 2);
     }
 
     public function balance() {
-        return (float) sprintf('%0.2f', $this->principal - $this->totalPaid());
+        return round($this->principal - $this->totalPaid(), 2);
     }
 
     public function daysPAR() {
@@ -43,11 +43,11 @@ class Loan extends Model
     }
     
     public function totalPaid() {
-        return (float) sprintf('%0.2f', $this->payments->sum('amount_payment'));
+        return round($this->payments->sum('amount_payment'), 2);
     }
 
     public function expectedPayment() {
-        return (float) sprintf('%0.2f', $this->monthlyPayment() * $this->monthsPassed());
+        return round($this->monthlyPayment() * $this->monthsPassed(), 2);
     }
 
     public function monthsPassed() {

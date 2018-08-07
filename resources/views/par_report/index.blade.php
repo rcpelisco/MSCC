@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-3">
+  <div class="col-lg-6">
     <div class="card">
       <div class="card-header">
         <strong>PAR Report</strong>
@@ -25,71 +25,129 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
+            Current (Active): 
+          </div>
+          <div class="col-4">
+            &#8369;
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([-INF,0]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([-INF,0]) / App\Member::totalBalance() * 100, 2), 2) }} %
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
             1-7 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([1,7]), 2) }} %
+              {{ number_format(round(App\Member::PAR([1,7]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([1,7]) / App\Member::totalBalance() * 100, 2), 2) }} %
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             8-15 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([8,15]), 2) }} %
+              {{ number_format(round(App\Member::PAR([8,15]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([8,15]) / App\Member::totalBalance() * 100, 2), 2) }} %
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             16-30 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([16,30]), 2) }} %
+              {{ number_format(round(App\Member::PAR([16,30]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([16,30]) / App\Member::totalBalance() * 100, 2), 2) }} %
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             31-90 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([31,90]), 2) }} %
+              {{ number_format(round(App\Member::PAR([31,90]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([31,90]) / App\Member::totalBalance() * 100, 2), 2) }} %              
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
-            90-360 days: 
+          <div class="col-4">
+            91-360 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([91,360]), 2) }} %
+              {{ number_format(round(App\Member::PAR([91,360]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([91,360]) / App\Member::totalBalance() * 100, 2), 2) }} %
             </span>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
-            Over days: 
+          <div class="col-4">
+            Over 360 days: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
             <span class="pull-right">
-              {{ number_format(App\Member::PAR([360,INF]), 2) }} %
+              {{ number_format(round(App\Member::PAR([361,INF]), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
+            <span class="pull-right">
+              {{ number_format(round(App\Member::PAR([361,INF]) / App\Member::totalBalance() * 100, 2), 2) }} %
             </span>
           </div>
         </div>
         <hr class="my-1">
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             Total: 
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            &#8369;
+            <span class="pull-right">
+              {{ number_format(round(App\Member::totalBalance(), 2), 2) }}
+            </span>
+          </div>
+          <div class="col-4">
             <span class="pull-right">
               100.00 %
             </span>
@@ -125,11 +183,12 @@
       new Chart(canvas, {
         type: 'pie',
         data: {
-          labels: ["1-7 days", "8-15 days", "16-30 days", "31-90 days", "90-360 days", "Over 360 days"],
+          labels: ["Current (active)", "1-7 days", "8-15 days", "16-30 days", "31-90 days", "90-360 days", "Over 360 days"],
           datasets: [{
             label: '# of Votes',
             data: data,
             backgroundColor: [
+              'rgba(127, 127, 127, 0.75)',
               'rgba(255, 99, 132, .75)',
               'rgba(54, 162, 235, .75)',
               'rgba(255, 206, 86, .75)',
