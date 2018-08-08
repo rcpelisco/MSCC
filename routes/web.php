@@ -20,6 +20,8 @@ Route::resources([
 Route::post('/members/{member}/loans', 'LoansController@store');
 Route::get('/par_report', 'LoansController@showPARReport')->name('par_report.index');
 Route::get('/par_report/get_data', 'LoansController@getPARData')->name('par_report.get_data');
+Route::get('//loans/{loan}/edit', 'LoansController@edit')->name('loans.edit');
+Route::post('/loans/{loan}', 'LoansController@update');
 
 Route::post('/loans/{loan}/payments', 'PaymentsController@store');
 Route::delete('/payments/{payment}', 'PaymentsController@destroy');

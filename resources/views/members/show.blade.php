@@ -7,9 +7,6 @@
 .display-inline-block {
   display: inline-block;
 }
-.text {
-  
-}
 </style>
 @endsection
 
@@ -20,21 +17,23 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-8">
-        <h1 class="display-inline-block">{{ $member->first_name . ' ' . $member->last_name }}</h1>
+        <h1 class="display-inline-block">{{ $member->first_name . ' ' . $member->middle_name .' ' . $member->last_name }}</h1>
       </div>
       <div class="col-md-4 d-lg-none">
         <div class="row" style="margin-top: .5em;">
-          @if($member->loans->last()->balance() > 0)
-          <div class="col-4">
-            <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
-          </div>
+          @if($member->loans->last() != null)
+            @if($member->loans->last()->balance() > 0)
+            <div class="col-4">
+              <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
+            </div>
+            @endif
           @else
             <div class="col-4">
               <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#addLoanModal">Add Loan</button>
             </div>
           @endif
           <div class="col-4">
-            <button class="btn btn-warning btn-block btn-sm">Edit</button>
+            <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning btn-block btn-sm">Edit</a>
           </div>
           <div class="col-4">
               <button class="btn btn-danger btn-block btn-sm">Delete</button>
@@ -43,12 +42,14 @@
       </div>
       <div class="col-md-4 d-none d-md-block">
         <div class="pull-right" style="margin-top: .5em;">
-          @if($member->loans->last()->balance() > 0)
-          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
+          @if($member->loans->last() != null)
+            @if($member->loans->last()->balance() > 0)
+              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
+            @endif
           @else
-          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addLoanModal">Add Loan</button>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addLoanModal">Add Loan</button>
           @endif
-          <button class="btn btn-warning btn-sm">Edit</button>
+          <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
           <button class="btn btn-danger btn-sm">Delete</button>
         </div>
       </div>
@@ -57,8 +58,8 @@
     @if($member->loans->last())
     <div class="row">
       <div class="col-md-4">
-        <h3>Latest Loan</h3>
-        
+        <h3 class="display-inline-block">Latest Loan</h3>
+        <a href="{{ route('loans.edit', $member->loans->last()->id) }}" class="btn btn-sm btn-warning pull-right" style="margin-top: 5px;">Edit</a>
         <div class="row">
           <div class="col-6">
             Date Released: 
@@ -224,6 +225,7 @@
     </div>
   </div>
 </div>
+@if($member->loans->last() != null)
 <div class="modal fade" id="paymentModal" tabindex="-2" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -270,4 +272,5 @@
     </div>
   </div>
 </div>
+@endif
 @endsection

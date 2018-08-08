@@ -21,8 +21,8 @@
             <tbody>
               @foreach($members as $member)
                 <tr>
-                  <td><a href="{{ route('members.show', ['member' => $member->id ]) }}">
-                    {{ $member->first_name . ' ' . $member->last_name }}
+                  <td><a href="{{ route('members.show', $member->id) }}">
+                    {{ $member->first_name . ' ' . $member->middle_name .' ' . $member->last_name }}
                   </a></td>
                   <td>{{ $member->created_at->toDayDateTimeString() }}</td>
                 </tr>

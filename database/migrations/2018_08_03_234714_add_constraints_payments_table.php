@@ -27,7 +27,7 @@ class AddConstraintsPaymentsTable extends Migration
     public function down()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropForiegn(['loan_id']);
+            $table->dropForeign(['loan_id']);
         });
     }
 }

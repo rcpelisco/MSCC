@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Member;
-use Carbon\Carbon;
+use App\Http\Requests\MembersForm;
 
 class MembersController extends Controller
 {
@@ -31,24 +30,20 @@ class MembersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \App\Http\Requests\MembersForm $form
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(MembersForm $form)
     {
-        request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-        ]);
-        
-        Member::create(request(['first_name', 'last_name']));
-        
+        $form->persist();
+
         return redirect()->route('members.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
     public function show(Member $member)
@@ -59,24 +54,30 @@ class MembersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        //
+        return view('members.edit', compact('member'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Member $member)
     {
-        //
+        $member->first_name = request('first_name');
+        $member->middle_name = request('middle_name');
+        $member->last_name = request('last_name');
+        $member->address = request('address');
+        $member->contact_no = request('contact_no');
+        $member->save();
+
+        return redirect(route('members.show', $member->id));
     }
 
     /**

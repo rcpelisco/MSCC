@@ -16,16 +16,36 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-group">
                 {{Form::label('first_name' , 'First Name')}}
                 {{Form::text('first_name' , '', ['class' => 'form-control' , 'placeholder' => 'First Name'])}}
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+              <div class="form-group">
+                {{Form::label('middle_name' , 'Middle Name')}}
+                {{Form::text('middle_name' , '', ['class' => 'form-control' , 'placeholder' => 'Middle Name'])}}
+              </div>
+            </div>
+            <div class="col-sm-4">
               <div class="form-group">
                 {{Form::label('last_name' , 'Last Name')}}
                 {{Form::text('last_name' , '', ['class' => 'form-control' , 'placeholder' => 'Last Name'])}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                {{Form::label('address' , 'Address')}}
+                {{Form::text('address' , '', ['class' => 'form-control' , 'placeholder' => 'Address'])}}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                {{Form::label('contact_no' , 'Contact No.')}}
+                {{Form::text('contact_no' , '', ['class' => 'form-control' , 'placeholder' => 'Contact No.'])}}
               </div>
             </div>
           </div>

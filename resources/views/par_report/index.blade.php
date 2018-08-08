@@ -36,7 +36,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([-INF,0]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -52,7 +54,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([1,7]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -68,7 +72,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([8,15]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -84,7 +90,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([16,30]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -100,7 +108,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([31,90]) / App\Member::totalBalance() * 100, 2)) %              
+            @endif
             </span>
           </div>
         </div>
@@ -116,7 +126,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([91,360]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -132,7 +144,9 @@
           </div>
           <div class="col-4">
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::PAR([361,INF]) / App\Member::totalBalance() * 100, 2)) %
+            @endif
             </span>
           </div>
         </div>
@@ -144,7 +158,9 @@
           <div class="col-4">
             &#8369;
             <span class="pull-right">
+            @if(App\Member::totalBalance() > 0)
               @convert(round(App\Member::totalBalance(), 2))
+            @endif
             </span>
           </div>
           <div class="col-4">
