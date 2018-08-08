@@ -27,7 +27,6 @@ class MembersForm extends FormRequest
     {
         return [
             'first_name' => 'required',
-            'middle_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
             'contact_no' => 'required',
