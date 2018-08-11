@@ -98,6 +98,7 @@ $(function() {
       chartData.members[item._index].forEach(function(item) {
         members += '<li class="list-group-item">' + item + '</li>'
       })
+      $('#borrowersOnPARModalLabel').html(chartData.label[item._index])
       $('#borrowersOnPARModal .list-group').html(members)
       $('#borrowersOnPARModal').modal()
     }

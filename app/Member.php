@@ -34,7 +34,7 @@ class Member extends Model
         })->sum();
         $obj['names'] = $onPAR->map(function($item, $key) {
             return $item->first_name . ' ' . $item->middle_name . ' ' . $item->last_name;
-        });
+        })->flatten();
         return $obj;
     }
 

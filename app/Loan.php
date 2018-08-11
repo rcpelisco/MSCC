@@ -65,7 +65,7 @@ class Loan extends Model
                 'members' => Member::PAR([-INF,0])['names'],
             ],
             [
-                'label' => '1-7 days: ',
+                'label' => '1-7 day(s): ',
                 'data' => round(Member::PAR([1,7])['data'], 2),
                 'percentage' => round(Member::PAR([1,7])['data'] / $totalBalance * 100, 2),
                 'backgroundColor' => 'rgba(255, 99, 132, .75)',

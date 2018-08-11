@@ -55,6 +55,7 @@ class LoansController extends Controller
 
     public function showPARReport() {
         $report = Loan::parReport();
+        // return $report;
         return view('par_report.index', compact('report'));
     }
 }
