@@ -24,12 +24,18 @@ class Member extends Model
         return $this->loans->last()->daysPAR();
     }
 
-    public static function PAR($query) {
-        return static::all()->filter(function($item, $key) use ($query) {
-            return $item->daysPAR() >= $query[0] && $item->daysPAR() <= $query[1];
-        })->map(function($item, $key) {
+    public static function PAR($params) {
+        $obj = collect([]);
+        $onPAR = static::all()->filter(function($item, $key) use ($params) {
+            return $item->daysPAR() >= $params[0] && $item->daysPAR() <= $params[1];
+        });
+        $obj['data'] = $onPAR->map(function($item, $key) {
             return $item->loans->last()->balance();
         })->sum();
+        $obj['names'] = $onPAR->map(function($item, $key) {
+            return $item->first_name . ' ' . $item->middle_name . ' ' . $item->last_name;
+        });
+        return $obj;
     }
 
     public static function totalBalance() {
