@@ -24,7 +24,7 @@
           @if($member->loans->last() != null)
             @if($member->loans->last()->balance() > 0)
             <div class="col-4">
-              <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
+              <button class="btn btn-primary btn-block btn-sm" id="paymentModalButton">Pay</button>
             </div>
             @endif
           @else
@@ -76,12 +76,21 @@
 @section('javascripts')
 <script>
   $(function() {
+    @if($errors->isNotEmpty())
+      setTimeout(function() {
+        $('#editPaymentModal').modal()
+      }, 750)
+    @endif
     $('.editPaymentButton').click(function() {
       let id = $(this).attr('data-id')
       asyncEdit(id)
       $('#editPaymentModal').modal()
     })
     
+    $('#addPaymentModalButton').click(function() {
+      $('#addPaymentModal')
+    })
+
     Number.prototype.pad = function(size) {
       var s = String(this);
       while (s.length < (size || 2)) {s = "0" + s;}
@@ -97,11 +106,11 @@
           date = date.getFullYear() + '-' 
             + (date.getMonth() + 1).pad() 
             + '-' + date.getDate().pad()
-          $('form').attr('action', '/payments/' + id)
-          $('input[name="amount_payment"]').val(data.amount_payment);
-          $('input[name="date_payment"]').val(date);
-          $('input[name="or_number"]').val(data.or_number);
-          $('input[name="amount_payment"]').val(data.amount_payment);
+          $('form#editPayment').attr('action', '/payments/' + id)
+          $('#editPayment input[name="amount_payment"]').val(data.amount_payment);
+          $('#editPayment input[name="date_payment"]').val(date);
+          $('#editPayment input[name="or_number"]').val(data.or_number);
+          $('#editPayment input[name="amount_payment"]').val(data.amount_payment);
         }
       })
     }

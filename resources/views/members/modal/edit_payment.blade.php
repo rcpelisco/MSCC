@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       {{-- <form action="" method="POST"></form> --}}
-      {!! Form::open(['action' => ['PaymentsController@update', 1], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
+      {!! Form::open(['action' => ['PaymentsController@update', 1], 'method' => 'post', 'style' => 'margin: 0px;', 'id' => 'editPayment']) !!}
       <div class="modal-header">
         <h5 class="modal-title" id="editPaymentModalLabel">Payment form <small>edit</small></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -13,14 +13,27 @@
       </div>
 
       <div class="modal-body">
+        @if($errors->isNotEmpty())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @foreach($errors->all() as $error)
+              {{ $error }}
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
         <div class="form-group">
           {{ Form::label('date_payment' , 'Payment Date') }}
           {{ Form::date('date_payment' , '', ['class' => 'form-control', 'required']) }}
         </div>
+
         <div class="form-group">
           {{ Form::label('or_number' , 'OR Number') }}
           {{ Form::text('or_number' , '', ['class' => 'form-control' , 'placeholder' => '####', 'required']) }}
         </div>
+
         <div class="form-group">
           {{ Form::label('amount_payment' , 'Amount') }}
           <div class="input-group">
@@ -33,7 +46,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 

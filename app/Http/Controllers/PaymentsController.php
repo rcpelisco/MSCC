@@ -26,11 +26,17 @@ class PaymentsController extends Controller
     }
 
     public function update(Payment $payment) {
+        $this->validate(request(), [
+            'date_payment' => 'required',
+            'or_number' => 'required',
+            'amount_payment' => 'required|numeric',
+        ]);
         $payment->update(request([
             'date_payment',
             'or_number',
             'amount_payment',
         ]));
+
         return back();
     }
     
