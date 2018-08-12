@@ -19,7 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('middle_name', 45);
             $table->string('last_name', 45);
             $table->string('address', 125);
-            $table->string('contact_no', 11);
+            $table->string('contact_no', 20);
             $table->timestamps();
         });
     }

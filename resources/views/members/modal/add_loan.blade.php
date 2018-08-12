@@ -1,7 +1,7 @@
 <div class="modal fade" id="addLoanModal" tabindex="-1" role="dialog" aria-labelledby="addLoanModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      {!! Form::open(['action' => ['LoansController@store', $member->id] , 'method' => 'post', 'style' => 'margin: 0px;']) !!}
+      {!! Form::open(['action' => ['LoansController@store', $member->id], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
       <div class="modal-header">
         <h5 class="modal-title" id="addLoanModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

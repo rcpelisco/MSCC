@@ -25,7 +25,10 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define(App\Member::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName,
+        'middle_name' => ucfirst($faker->randomLetter) . '.',
         'last_name' => $faker->lastName,
+        'address' => $faker->address,
+        'contact_no' => $faker->tollFreePhoneNumber,
     ];
 });
 

@@ -42,16 +42,19 @@
       </div>
       <div class="col-md-4 d-none d-md-block">
         <div class="pull-right" style="margin-top: .5em;">
+          {!! Form::open(['action' => ['MembersController@destroy', $member->id], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
+          {{ Form::hidden('_method', 'delete') }}
           @if($member->loans->last() != null)
             @if($member->loans->last()->balance() > 0)
-              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paymentModal">Pay</button>
             @endif
           @else
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addLoanModal">Add Loan</button>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addLoanModal">Add Loan</button>
           @endif
           <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
-          <button class="btn btn-danger btn-sm">Delete</button>
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
         </div>
+        {!! Form::close() !!}
       </div>
     </div>
     <hr class="my-2">

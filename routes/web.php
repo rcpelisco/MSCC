@@ -27,3 +27,5 @@ Route::post('/loans/{loan}/payments', 'PaymentsController@store');
 Route::delete('/payments/{payment}', 'PaymentsController@destroy');
 Route::get('/payments/{payment}/async_edit', 'PaymentsController@asyncEdit');
 Route::post('/payments/{payment}', 'PaymentsController@update');
+
+Route::get('database/dump', 'DatabaseController@dump')->name('database.dump');
