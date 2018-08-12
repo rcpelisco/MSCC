@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\DBDumpCommand::class,
+        \App\Console\Commands\DBRestoreCommand::class,
     ];
 
     /**
