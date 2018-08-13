@@ -56,61 +56,61 @@ class Loan extends Model
 
     public static function parReport() {
         $totalBalance = Member::totalBalance();
-        return collect([
+        $args = [
             [
                 'label' => 'Current (active): ',
-                'data' => round(Member::PAR([-INF,0])['data'], 2),
-                'percentage' => round(Member::PAR([-INF,0])['data'] / $totalBalance * 100, 2),
+                'args' => [-INF,0],
                 'backgroundColor' => 'rgba(127, 127, 127, 0.75)',
-                'members' => Member::PAR([-INF,0])['members'],
             ],
             [
                 'label' => '1-7 day(s): ',
-                'data' => round(Member::PAR([1,7])['data'], 2),
-                'percentage' => round(Member::PAR([1,7])['data'] / $totalBalance * 100, 2),
+                'args' => [1,7],
                 'backgroundColor' => 'rgba(255, 99, 132, .75)',
-                'members' => Member::PAR([1,7])['members'],
             ],
             [
                 'label' => '8-15 days: ',
-                'data' => round( Member::PAR([8,15])['data'], 2),
-                'percentage' => round( Member::PAR([8,15])['data'] / $totalBalance * 100, 2),
+                'args' => [8,15],
                 'backgroundColor' => 'rgba(54, 162, 235, .75)',
-                'members' => Member::PAR([8,15])['members'],
             ],
             [
                 'label' => '16-30 days: ',
-                'data' => round(Member::PAR([16,30])['data'], 2),
-                'percentage' => round(Member::PAR([16,30])['data'] / $totalBalance * 100, 2),
+                'args' => [16,30],
                 'backgroundColor' => 'rgba(255, 206, 86, .75)',
-                'members' => Member::PAR([16,30])['members'],
             ],
             [
                 'label' => '31-90 days: ',
-                'data' => round(Member::PAR([31,90])['data'], 2),
-                'percentage' => round(Member::PAR([31,90])['data'] / $totalBalance * 100, 2),
+                'args' => [31,90],
                 'backgroundColor' => 'rgba(75, 192, 192, .75)',
-                'members' => Member::PAR([31,90])['members'],
             ],
             [
                 'label' => '91-360 days: ',
-                'data' => round(Member::PAR([91,360])['data'], 2),
-                'percentage' => round(Member::PAR([91,360])['data'] / $totalBalance * 100, 2),
+                'args' => [91,360],
                 'backgroundColor' => 'rgba(153, 102, 255, .75)',
-                'members' => Member::PAR([91,360])['members'],
             ],
             [
                 'label' => 'over 361 days: ',
-                'data' => round(Member::PAR([361,INF])['data'], 2),
-                'percentage' => round(Member::PAR([361,INF])['data'] / $totalBalance * 100, 2),
+                'args' => [361,INF],
                 'backgroundColor' => 'rgba(255, 159, 64, .75)',
-                'members' => Member::PAR([361,INF])['members'],
             ],
-            [
-                'label' => 'Total: ',
-                'data' => round($totalBalance, 2),
-                'percentage' => 100
-            ],
-        ]);
+        ];
+
+        $report = collect();
+
+        foreach($args as $arg) {
+            $data = Member::PAR($arg['args']);
+            $report[] = collect([
+                'label' => $arg['label'],
+                'data' => round($data['data'], 2),
+                'percentage' => round($data['data'] / $totalBalance * 100, 2),
+                'backgroundColor' => $arg['backgroundColor'],
+                'members' => $data['members'],
+            ]);
+        }
+        $report[] = [
+            'label' => 'Total: ',
+            'data' => round($totalBalance, 2),
+            'percentage' => 100,
+        ];
+        return $report;
     }
 }
