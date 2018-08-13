@@ -98,8 +98,8 @@ $(function() {
       let members = ''
 
       chartData.members[item._index].forEach(function(item) {
-        members += '<li class="list-group-item">' + item.name 
-          + ' - &#8369; ' + item.amount.toLocaleString('en', {minimumFractionDigits: 2}) 
+        members += '<li class="list-group-item"><a href="/members/' + item.id + '">' + item.name 
+          + '</a> - &#8369; ' + item.amount.toLocaleString('en', {minimumFractionDigits: 2}) 
           + '</li>'
       })
 

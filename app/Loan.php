@@ -51,7 +51,10 @@ class Loan extends Model
     }
 
     public function monthsPassed() {
-        return $this->date_released->diffInMonths(Carbon::now());
+        if(Carbon::now() >= $this->date_mature) {
+            return $this->date_mature->diffInMonths($this->date_released);
+        }
+        return (Carbon::now())->diffInMonths($this->date_released);
     }
 
     public static function parReport() {

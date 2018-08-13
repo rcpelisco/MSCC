@@ -15,7 +15,8 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Date registered</th>
+                <th>Contact no.</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
@@ -24,7 +25,8 @@
                   <td><a href="{{ route('members.show', $member->id) }}">
                     {{ $member->first_name . ' ' . $member->middle_name .' ' . $member->last_name }}
                   </a></td>
-                  <td>{{ $member->created_at->toDayDateTimeString() }}</td>
+                  <td>{{ $member->contact_no }}</td>
+                  <td>{{ $member->address }}</td>
                 </tr>
               @endforeach
             </tbody>

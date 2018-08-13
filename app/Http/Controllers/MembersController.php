@@ -61,7 +61,7 @@ class MembersController extends Controller
     {
         return view('members.edit', compact('member'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *

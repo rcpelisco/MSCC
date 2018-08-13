@@ -1,11 +1,12 @@
-
-@if($member->loans->last() != null)
-<div class="modal fade" id="editPaymentModal" tabindex="-2" role="dialog" aria-labelledby="editPaymentModalLabel" aria-hidden="true">
+@php
+$loan = $member->loans->last()
+@endphp
+<div class="modal fade" id="editLoanModal" tabindex="-2" role="dialog" aria-labelledby="editLoanModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      {!! Form::open(['action' => ['PaymentsController@update', 1], 'method' => 'post', 'style' => 'margin: 0px;', 'id' => 'editPayment']) !!}
+    <div class="modal-content">    
+      {!! Form::open(['action' => ['LoansController@update', $loan->id], 'method' => 'post']) !!}
       <div class="modal-header">
-        <h5 class="modal-title" id="editPaymentModalLabel">Payment form <small>edit</small></h5>
+        <h5 class="modal-title" id="editLoanModalLabel">Member's form <small>edit</small></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -24,28 +25,21 @@
         @endif
 
         <div class="form-group">
-          {{ Form::label('date_payment' , 'Payment Date') }}
-          {{ Form::date('date_payment' , '', ['class' => 'form-control', 'required']) }}
+          {{ Form::label('principal' , 'Principal') }}
+          {{ Form::text('principal' , $loan->principal, ['class' => 'form-control' , 'placeholder' => 'Enter Principal']) }}
         </div>
 
         <div class="form-group">
-          {{ Form::label('or_number' , 'OR Number') }}
-          {{ Form::text('or_number' , '', ['class' => 'form-control' , 'placeholder' => '####', 'required']) }}
+          {{ Form::label('date_released' , 'Date Released') }}
+          {{ Form::date('date_released' , $loan->date_released, ['class' => 'form-control' , 'placeholder' => 'Date Released']) }}
         </div>
 
         <div class="form-group">
-          {{ Form::label('amount_payment' , 'Amount') }}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-peso">&#8369;</i>
-              </span>
-            </div>
-            {{ Form::text('amount_payment', '', ['class' => 'form-control' , 'placeholder' => '1000', 'required']) }}
-          </div>
+          {{ Form::label('months_to_pay' , 'Months to Pay') }}
+          {{ Form::text('months_to_pay' , $loan->months_to_pay, ['class' => 'form-control' , 'placeholder' => 'Months to Pay']) }}
         </div>
+
       </div>
-      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
@@ -59,4 +53,3 @@
     </div>
   </div>
 </div>
-@endif
