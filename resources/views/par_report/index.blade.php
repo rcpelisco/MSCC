@@ -97,9 +97,9 @@ $(function() {
     if(item) {
       let members = ''
       chartData.members[item._index].forEach(function(item) {
-        members += '<li class="list-group-item">' + item.name + ' - &#8369; ' + item.amount.toFixed(2) + '</li>'
+        members += '<li class="list-group-item">' + item.name + ' - &#8369; ' + item.amount.toLocaleString('en', {minimumFractionDigits: 2}) + '</li>'
       })
-      $('#borrowersOnPARModalLabel').html(chartData.label[item._index] + ' &#8369; ' + chartData.data[item._index].toFixed(2))
+      $('#borrowersOnPARModalLabel').html(chartData.label[item._index] + ' &#8369; ' + chartData.data[item._index].toLocaleString('en', {minimumFractionDigits: 2}))
       $('#borrowersOnPARModal .list-group').html(members)
       $('#borrowersOnPARModal').modal()
     }
