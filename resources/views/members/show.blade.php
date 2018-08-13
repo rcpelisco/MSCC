@@ -64,7 +64,6 @@
       </div>
     </div>
     <hr class="my-2">
-    @if($member->loans->last())
     <div class="row">
       <div class="col-md-4">
         <div class="row">
@@ -72,7 +71,7 @@
             @include('members.extra.latest_loan')
           </div>
         </div>
-        <hr>
+        
         <div class="row">
           <div class="col-md-12">
               @include('members.extra.personal_info')
@@ -83,9 +82,6 @@
         @include('members.extra.payments')
       </div>
     </div>
-    @else
-    <p>No active loan yet ... </p>
-    @endif
   </div>
 </div>
 <!-- Modals -->
@@ -99,10 +95,28 @@
 @section('javascripts')
 <script>
   $(function() {
-    @if($errors->isNotEmpty())
-      setTimeout(function() {
-        $('#editPaymentModal').modal()
-      }, 750)
+    @if(request()->has('ref'))
+      @if(request('ref') == 'create_payment_fail')
+        setTimeout(function() {
+          $('#paymentModal').modal()
+        }, 500)
+      @elseif(request('ref') == 'edit_payment_fail')
+        setTimeout(function() {
+          $('#editPaymentModal').modal()
+        }, 500)
+      @elseif(request('ref') == 'create_loan_fail')
+        setTimeout(function() {
+          $('#addLoanModal').modal()
+        }, 500)
+      @elseif(request('ref') == 'edit_loan_fail')
+        setTimeout(function() {
+          $('#editLoanModal').modal()
+        }, 500)
+      @elseif(request('ref') == 'edit_member_fail')
+        setTimeout(function() {
+          $('#editMemberModal').modal()
+        }, 500)
+      @endif
     @endif
 
     $('.editPaymentButton').click(function() {

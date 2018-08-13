@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('loan_id')->unsigned();
             $table->date('date_payment');
             $table->string('or_number');
-            $table->string('amount_payment');
+            $table->double('amount_payment');
             $table->timestamps();
         });
     }

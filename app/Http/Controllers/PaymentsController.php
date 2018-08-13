@@ -6,16 +6,31 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Loan;
 use App\Payment;
 
 class PaymentsController extends Controller
 {
     public function store(Loan $loan) {
+        $validator = Validator::make(request()->all(), [
+            'date_payment' => 'required', 
+            'or_number' => 'required', 
+            'amount_payment' => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            return redirect('members/' . $loan->member->id 
+                . '/?ref=create_payment_fail')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $loan->pay(request([
             'date_payment', 
             'or_number', 
-            'amount_payment'
+            'amount_payment',
         ]));
 
         return back();
@@ -26,18 +41,27 @@ class PaymentsController extends Controller
     }
 
     public function update(Payment $payment) {
-        $this->validate(request(), [
-            'date_payment' => 'required',
-            'or_number' => 'required',
+        $validator = Validator::make(request()->all(), [
+            'date_payment' => 'required', 
+            'or_number' => 'required', 
             'amount_payment' => 'required|numeric',
         ]);
+
+        if($validator->fails()) {
+            return redirect('members/' . $payment->loan->member->id 
+                . '/?ref=edit_payment_fail')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
         $payment->update(request([
             'date_payment',
             'or_number',
             'amount_payment',
         ]));
 
-        return back();
+        return redirect(route('members.show', 
+            $payment->loan->member->id));
     }
     
     public function destroy(Payment $payment) {

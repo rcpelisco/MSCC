@@ -1,6 +1,7 @@
 @php
 $loan = $member->loans->last()
 @endphp
+@if($loan != null)
 <h3 class="display-inline-block">Latest Loan</h3>
 <button class="btn btn-sm btn-warning pull-right" style="margin-top: 0px;" 
   data-target="#editLoanModal" data-toggle="modal">Edit</button>
@@ -88,3 +89,5 @@ $loan = $member->loans->last()
     <span class="pull-right">{{ $loan->daysPAR() }}</span>
   </div>
 </div>
+<hr>
+@endif

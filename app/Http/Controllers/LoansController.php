@@ -8,10 +8,24 @@ use Carbon\Carbon;
 
 use App\Member;
 use App\Loan;
+use Illuminate\Support\Facades\Validator;
 
 class LoansController extends Controller
 {
     public function store(Member $member) {
+        $validator = Validator::make(request()->all(), [
+            'principal' => 'required|numeric',
+            'date_released' => 'required',
+            'months_to_pay' => 'required|numeric',    
+        ]);
+
+        if($validator->fails()) {
+            return redirect('members/' . $member->id 
+                . '?ref=create_loan_fail')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $member->applyLoan(
             request('principal'), 
             request('date_released'), 
@@ -29,6 +43,19 @@ class LoansController extends Controller
     }
 
     public function update(Loan $loan) {
+        $validator = Validator::make(request()->all(), [
+            'principal' => 'required|numeric',
+            'date_released' => 'required',
+            'months_to_pay' => 'required|numeric',    
+        ]);
+
+        if($validator->fails()) {
+            return redirect('members/' . $loan->member->id 
+                . '?ref=edit_loan_fail')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
         $loan->principal = request('principal');
         $loan->date_released = request('date_released');
         $loan->date_mature = $this->getMaturityDate();

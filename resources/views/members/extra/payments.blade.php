@@ -1,4 +1,7 @@
-
+@php
+$loan = $member->loans->last()
+@endphp
+@if($loan != null)
 <h3>Payments</h3>
 <table class="table table-sm">
   <thead>
@@ -12,9 +15,9 @@
   </thead>
   <tbody>
     @php
-      $balance = $member->loans->last()->principal
+      $balance = $loan->principal
     @endphp
-    @foreach($member->loans->last()->payments as $payment)
+    @foreach($loan->payments as $payment)
       <tr>
         <td><small>{{ $payment->date_payment->format('F d, Y') }}</small></td>
         <td><small>{{ $payment->or_number }}</small></td>
@@ -42,3 +45,6 @@
     @endforeach
   </tbody>
 </table>
+@else
+<p class="lead text-center">No active loan yet ...</p>
+@endif

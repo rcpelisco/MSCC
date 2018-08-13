@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Member;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Requests\MembersForm;
+use App\Member;
 
 class MembersController extends Controller
 {
@@ -70,6 +72,21 @@ class MembersController extends Controller
      */
     public function update(Member $member)
     {
+        $validator = Validator::make(request()->all(), [
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'contact_no' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return redirect('members/' . $member->id 
+                . '?ref=edit_member_fail')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $member->first_name = request('first_name');
         $member->middle_name = request('middle_name');
         $member->last_name = request('last_name');

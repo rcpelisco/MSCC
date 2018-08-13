@@ -1,6 +1,7 @@
 @php
 $loan = $member->loans->last()
 @endphp
+@if($loan != null)
 <div class="modal fade" id="editLoanModal" tabindex="-2" role="dialog" aria-labelledby="editLoanModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">    
@@ -36,7 +37,7 @@ $loan = $member->loans->last()
 
         <div class="form-group">
           {{ Form::label('months_to_pay' , 'Months to Pay') }}
-          {{ Form::text('months_to_pay' , $loan->months_to_pay, ['class' => 'form-control' , 'placeholder' => 'Months to Pay']) }}
+          {{ Form::text('months_to_pay' , $loan->date_mature->diffInMonths($loan->date_released), ['class' => 'form-control' , 'placeholder' => 'Months to Pay']) }}
         </div>
 
       </div>
@@ -53,3 +54,4 @@ $loan = $member->loans->last()
     </div>
   </div>
 </div>
+@endif
