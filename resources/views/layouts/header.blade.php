@@ -29,24 +29,13 @@
         <div class="dropdown-header text-center">
           <strong>Settings</strong>
         </div>
-        <a class="dropdown-item" href="#">
-          <i class="fa fa-user"></i> Profile</a>
-        <a class="dropdown-item" href="#">
-          <i class="fa fa-wrench"></i> Settings</a>
-        <a class="dropdown-item" href="#">
-          <i class="fa fa-usd"></i> Payments
-          <span class="badge badge-secondary">42</span>
-        </a>
-        <a class="dropdown-item" href="#">
-          <i class="fa fa-file"></i> Projects
-          <span class="badge badge-primary">42</span>
-        </a>
-        <div class="divider"></div>
+        <a class="dropdown-item" href="{{ route('app.update') }}">
+          <i class="fa fa-download"></i> Update App</a>
+        {{-- <a class="dropdown-item" href="{{ route('database.restore') }}">
+          <i class="fa fa-retweet"></i> Restore Database</a>
         <a class="dropdown-item" href="{{ route('database.dump') }}">
-          <i class="fa fa-shield"></i> Back up Database</a>
-        <a class="dropdown-item" href="#">
-          <i class="fa fa-lock"></i> Logout</a>
-      </div>
+          <i class="fa fa-floppy-o"></i> Back up Database</a>
+      </div> --}}
     </li>
   </ul>
   <div style="width: 2em"></div>
