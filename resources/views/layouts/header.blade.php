@@ -31,6 +31,8 @@
         </div>
         <a class="dropdown-item" href="{{ route('app.update') }}">
           <i class="fa fa-download"></i> Update App</a>
+        <a class="dropdown-item" href="{{ route('app.update') }}">
+          <i class="fa fa-download"></i> Update App x2</a>
         {{-- <a class="dropdown-item" href="{{ route('database.restore') }}">
           <i class="fa fa-retweet"></i> Restore Database</a>
         <a class="dropdown-item" href="{{ route('database.dump') }}">
