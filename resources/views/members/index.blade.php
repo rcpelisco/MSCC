@@ -30,7 +30,7 @@
                   <td>{{ $member->address }}</td>
                   <td>
                     {!! Form::open(['action' => ['MembersController@destroy', $member->id], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
-                      <button class="btn-btn-danger" type="submit">
+                      <button class="btn btn-danger" type="submit">
                       <i class="fa fa-trash"></i></button>
                     {!! Form::close() !!}
                   </td>
