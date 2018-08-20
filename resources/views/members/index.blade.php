@@ -29,10 +29,9 @@
                   <td>{{ $member->contact_no }}</td>
                   <td>{{ $member->address }}</td>
                   <td>
-                    {!! Form::open(['action' => ['MembersController@destroy', $member->id], 'method' => 'post', 'style' => 'margin: 0px;']) !!}
-                      <button class="btn btn-danger" type="submit">
+                    <button class="btn btn-danger btn-delete-member" type="submit" data-id="{{ $member->id }}"
+                      data-name="{{ $member->first_name . ' ' . $member->middle_name . ' ' . $member->last_name }}">
                       <i class="fa fa-trash"></i></button>
-                    {!! Form::close() !!}
                   </td>
                 </tr>
               @endforeach
@@ -43,12 +42,21 @@
     </div>
   </div>
 </div>
+@include('members.modal.delete_member_prompt')
 @endsection
 
 @section('javascripts')
 <script>
 $(function() {
-    $('.table').DataTable();
+    $('.table').DataTable()
+    $('body').on('click', '.btn-delete-member', function() {
+      let id = $(this).attr('data-id')
+      let name = $(this).attr('data-name')
+      console.log(id + " " + name)
+      $('#deleteMemberPromptModal #memberName').html(name)
+      $('#deleteMemberPromptModal form').attr('action', '/members/' +id)
+      $('#deleteMemberPromptModal').modal()
+    })
 })
 </script>
 @endsection
